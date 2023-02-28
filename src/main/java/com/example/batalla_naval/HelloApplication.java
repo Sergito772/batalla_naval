@@ -20,9 +20,6 @@ public class HelloApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("hello-view.fxml"));
-        Media media = new Media(HelloApplication.class.getResource("musicaFondo.mp3").toExternalForm());
-        MediaPlayer mediaPlayer = new MediaPlayer(media);
-        mediaPlayer.play();
         Scene scene = new Scene(fxmlLoader.load(), 1220, 598);
         stage.setTitle("Batalla naval");
         stage.setScene(scene);

@@ -5,7 +5,6 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.media.MediaPlayer;
-import javafx.util.Duration;
 import javafx.scene.media.Media;
 
 import java.util.ArrayList;
@@ -17,8 +16,7 @@ public class ControlDeJuego {
     private int contadorRumania=4;
     long comienzoDisparo=0;
     ArrayList<Boolean> tiempos=new ArrayList<>();
-    Media media=new Media(HelloApplication.class.getResource("rifle.mp3").toExternalForm());
-    MediaPlayer disparo=new MediaPlayer(media);
+    MediaPlayer mediaPlayer;
 
     public ControlDeJuego(ArrayList<Barco> barco){
         this.barcos=barco;
@@ -34,12 +32,17 @@ public class ControlDeJuego {
         tiempos.add(tempo6);
         tiempos.add(tempo7);
         tiempos.add(tempo8);
+        Media media1 = new Media(HelloApplication.class.getResource("musicaFondo.mp3").toExternalForm());
+        mediaPlayer = new MediaPlayer(media1);
+        mediaPlayer.play();
     }
 
     public void sonar(){
         AnimationTimer animationTimer = new AnimationTimer() {
             @Override
             public void handle(long now) {
+                Media media=new Media(HelloApplication.class.getResource("rifle.mp3").toExternalForm());
+                MediaPlayer disparo=new MediaPlayer(media);
                 // Actualizar coordenadas de los objetos
                 for (Barco objeto : barcos) {
                     objeto.getImagen().setX(objeto.getImagen().getTranslateX() + objeto.getImagen().getX());
@@ -108,12 +111,24 @@ public class ControlDeJuego {
                 }
                 if (contadorEspania==0){
                     stop();
+                    mediaPlayer.setMute(true);
+
+                    media = new Media(HelloApplication.class.getResource("Rumania.mp3").toExternalForm());
+                    MediaPlayer Rumania=new MediaPlayer(media);
+                    Rumania.play();
+
                     Alert alert=new Alert(Alert.AlertType.CONFIRMATION, "La victoria ha sido de rumania", ButtonType.OK);
                     alert.setTitle("Victoria de Rumania");
                     alert.setContentText("Ha ganado Rumania");
                     alert.show();
                 } else if (contadorRumania==0) {
                     stop();
+                    mediaPlayer.setMute(true);
+
+                    media = new Media(HelloApplication.class.getResource("Españita.mp3").toExternalForm());
+                    MediaPlayer España=new MediaPlayer(media);
+                    España.play();
+
                     Alert alert=new Alert(Alert.AlertType.CONFIRMATION, "La victoria ha sido de españa", ButtonType.OK);
                     alert.setTitle("Victoria de España");
                     alert.setContentText("Ha ganado España");

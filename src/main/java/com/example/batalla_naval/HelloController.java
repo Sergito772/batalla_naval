@@ -32,14 +32,14 @@ public class HelloController {
         Image imagen7=new Image(getClass().getResourceAsStream("lanchaRumania.png"));
         Image imagen8=new Image(getClass().getResourceAsStream("submarinoRumania.png"));
 
-        Barco barco=new Barco("Destructor", 100, 100, 300, 100, 2, 50, 100, "Espania", 20, 50, new ImageView(imagen1));
-        Barco barco1=new Barco("Lancha", 100, 100, 300, 200, 1, 40, 80, "Espania", 10, 20, new ImageView(imagen3));
-        Barco barco4=new Barco("Acorazado",100, 100, 300, 300, 1, 40, 50, "Espania", 40, 30, new ImageView(imagen2));
-        Barco barco5=new Barco("Submarino",100, 100, 300, 400, 1, 40, 50, "Espania", 40, 50, new ImageView(imagen4));
-        Barco barco6=new Barco("Destructor",100, 100, 800, 100, 1, 40, 50, "Rumania", 40, 30, new ImageView(imagen5));
-        Barco barco7=new Barco("Lancha",100, 100, 800, 200, 1, 40, 50, "Rumania", 40, 50, new ImageView(imagen7));
-        Barco barco2=new Barco("Acorazado",100, 100, 800, 300, 1, 40, 50, "Rumania", 40, 30, new ImageView(imagen6));
-        Barco barco3=new Barco("Submarino",100, 100, 800, 400, 1, 40, 50, "Rumania", 40, 50, new ImageView(imagen8));
+        Barco barco=new Barco("Destructor", 80, 75, 300, 100, 1.3f, 40, 50, "Espania", 30, 50, new ImageView(imagen1));
+        Barco barco1=new Barco("Lancha", 20, 60, 300, 200, 2, 40, 50, "Espania", 10, 40, new ImageView(imagen3));
+        Barco barco4=new Barco("Acorazado",120, 100, 300, 300, 1.1f, 40, 50, "Espania", 40, 50, new ImageView(imagen2));
+        Barco barco5=new Barco("Submarino",30, 80, 300, 400, 1, 40, 50, "Espania", 40, 50, new ImageView(imagen4));
+        Barco barco6=new Barco("Destructor",80, 75, 800, 100, 1.3f, 40, 50, "Rumania", 30, 50, new ImageView(imagen5));
+        Barco barco7=new Barco("Lancha",20, 60, 800, 200, 2, 40, 50, "Rumania", 10, 40, new ImageView(imagen7));
+        Barco barco2=new Barco("Acorazado",120, 100, 800, 300, 1.1f, 40, 50, "Rumania", 40, 50, new ImageView(imagen6));
+        Barco barco3=new Barco("Submarino",30, 80, 800, 400, 1, 40, 50, "Rumania", 40, 50, new ImageView(imagen8));
         barcos.add(barco);
         barcos.add(barco1);
         barcos.add(barco2);
@@ -52,7 +52,6 @@ public class HelloController {
         for (int i=0; i<barcos.size(); i++){
             barcos.get(i).getImagen().setFitWidth(barcos.get(i).getAncho());
             barcos.get(i).getImagen().setFitHeight(barcos.get(i).getAltura());
-            barco.getImagen().setRotate(rotacion);
 
             pane.getChildren().add(barcos.get(i).getImagen());
 

@@ -14,8 +14,8 @@ public class Barco {
     private int posY;
     private int cadencia;
     private int potencia;
-    private int velocidadX;
-    private int velocidadY;
+    private float velocidadX;
+    private float velocidadY;
     private int altura;
     private int ancho;
     private String pais;
@@ -23,7 +23,7 @@ public class Barco {
     private String Tipo;
     Timeline BarcoMovimiento;
 
-    public Barco(String Tipo, int vida, int sonar, int posX, int posY, int velocidad, int altura, int ancho, String pais, int cadencia, int potencia, ImageView imagen) {
+    public Barco(String Tipo, int vida, int sonar, int posX, int posY, float velocidad, int altura, int ancho, String pais, int cadencia, int potencia, ImageView imagen) {
         this.Tipo=Tipo;
         this.vida = vida;
         this.sonar = sonar;
@@ -101,7 +101,7 @@ public class Barco {
         this.posY = posY;
     }
 
-    public int getVelocidad() {
+    public float getVelocidad() {
         return velocidadX;
     }
 
@@ -158,12 +158,24 @@ public class Barco {
     }
 
     public void timeline(){
-        int velocidadPositiva=velocidadX;
-        int velocidadNegativa=velocidadX*-1;
+        float velocidadPositiva=velocidadX;
+        float velocidadNegativa=velocidadX*-1;
         int aleatoriop=(int)(Math.random()*2+1);
         if (aleatoriop==1) {
-            velocidadY = velocidadNegativa;
+            if (getTipo().equals("Destructor") || getTipo().equals("Acorazado"))
+                velocidadY = velocidadNegativa/4;
+            else
+                velocidadY = velocidadNegativa;
         }
+
+        if (getPais().equals("Rumania"))
+            if (getTipo().equals("Destructor") || getTipo().equals("Acorazado"))
+                velocidadX=velocidadNegativa*0.85f;
+            else
+                velocidadX=velocidadNegativa;
+
+        getImagen().setRotate(45);
+
         BarcoMovimiento=new Timeline(
                 new KeyFrame(Duration.seconds(0.017), (ActionEvent ae)->{
                     posX+=velocidadX;
@@ -172,14 +184,19 @@ public class Barco {
                     getImagen().setY(posY);
 
                     if (posX>=1000) {
-                        velocidadX = velocidadNegativa;
+                        if (getTipo().equals("Destructor") || getTipo().equals("Acorazado"))
+                            velocidadX = velocidadNegativa/2;
+                        else
+                            velocidadX = velocidadNegativa;
 
                         int aleatorio=(int)(Math.random()*2+1);
                         if (aleatorio==1) {
-                            velocidadY = velocidadPositiva;
                             getImagen().setRotate(315);
                         }else{
-                            velocidadY=velocidadNegativa;
+                            if (getTipo().equals("Destructor") || getTipo().equals("Acorazado"))
+                                velocidadY = velocidadPositiva*0.85f;
+                            else
+                                velocidadY = velocidadPositiva;
                             getImagen().setRotate(225);
                         }
                     }else if (posX<=180) {
@@ -188,25 +205,31 @@ public class Barco {
                         int aleatorio=(int)(Math.random()*2+1);
                         if (aleatorio==1) {
                             velocidadY = velocidadPositiva;
-                            getImagen().setRotate(45);
+                            getImagen().setRotate(315);
                         }else {
                             velocidadY = velocidadNegativa;
-                            getImagen().setRotate(135);
+                            getImagen().setRotate(45);
                         }
                     }
 
                     if (posY>=590) {
-                        velocidadY = velocidadNegativa;
+                        if (getTipo().equals("Destructor") || getTipo().equals("Acorazado"))
+                            velocidadY = velocidadNegativa/4;
+                        else
+                            velocidadY = velocidadNegativa;
 
                         int aleatorio=(int)(Math.random()*2+1);
                         if (aleatorio==1) {
                             velocidadX = velocidadPositiva;
                             getImagen().setRotate(45);
                         }else {
-                            velocidadX = velocidadNegativa;
+                            if (getTipo().equals("Destructor") || getTipo().equals("Acorazado"))
+                                velocidadX = velocidadNegativa*0.85f;
+                            else
+                                velocidadX = velocidadNegativa;
                             getImagen().setRotate(135);
                         }
-                    }else if (posY<=50) {
+                    }else if (posY<=70) {
                         velocidadY=velocidadPositiva;
 
                         int aleatorio=(int)(Math.random()*2+1);
@@ -214,7 +237,10 @@ public class Barco {
                             velocidadX = velocidadPositiva;
                             getImagen().setRotate(315);
                         }else {
-                            velocidadX = velocidadNegativa;
+                            if (getTipo().equals("Destructor") || getTipo().equals("Acorazado"))
+                                velocidadX = velocidadNegativa*0.85f;
+                            else
+                                velocidadX = velocidadNegativa;
                             getImagen().setRotate(225);
                         }
                     }
